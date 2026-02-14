@@ -1,16 +1,31 @@
-/**
-* Template Name: iPortfolio
-* Template URL: https://Mohamed Minhaj.com/iportfolio-bootstrap-portfolio-websites-template/
-* Updated: Jun 29 2024 with Bootstrap v5.3.3
-* Author: Mohamed Minhaj.com
-* License: https://Mohamed Minhaj.com/license/
-*/
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
 
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://Mohamed Minhaj.com/color-system/
---------------------------------------------------------------*/
-/* Fonts */
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glassGlow {
+  0% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 8px 32px 0 rgba(206, 18, 18, 0.4);
+  }
+
+  100% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  }
+}
+
 :root {
   --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Raleway", sans-serif;
@@ -25,7 +40,7 @@
   /* Default color used for the majority of the text content across the entire website */
   --heading-color: #050d18;
   /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #149ddd;
+  --accent-color: #ce1212;
   /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff;
   /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
@@ -52,7 +67,7 @@
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
-  --background-color: #f4fafd;
+  --background-color: #fff5f5;
   --surface-color: #ffffff;
 }
 
@@ -102,7 +117,7 @@ h6 {
 /* PHP 
 Email Form Messages
 ------------------------------*/
-.php- Email-form .error-message {
+.php-email-form .error-message {
   display: none;
   background: #df1529;
   color: #ffffff;
@@ -112,7 +127,7 @@ Email Form Messages
   font-weight: 600;
 }
 
-.php- Email-form .sent-message {
+.php-email-form .sent-message {
   display: none;
   color: #ffffff;
   background: #059652;
@@ -122,7 +137,7 @@ Email Form Messages
   font-weight: 600;
 }
 
-.php- Email-form .loading {
+.php-email-form .loading {
   display: none;
   background: var(--surface-color);
   text-align: center;
@@ -130,7 +145,7 @@ Email Form Messages
   margin-bottom: 24px;
 }
 
-.php- Email-form .loading:before {
+.php-email-form .loading:before {
   content: "";
   display: inline-block;
   border-radius: 50%;
@@ -139,10 +154,10 @@ Email Form Messages
   margin: 0 10px -6px 0;
   border: 3px solid var(--accent-color);
   border-top-color: var(--surface-color);
-  animation: php- Email-form-loading 1s linear infinite;
+  animation: php-email-form-loading 1s linear infinite;
 }
 
-@keyframes php- Email-form-loading {
+@keyframes php-email-form-loading {
   0% {
     transform: rotate(0deg);
   }
@@ -535,6 +550,11 @@ section,
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
+  background: linear-gradient(135deg, var(--accent-color) 0%, #00d2ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .section-title h2:after {
@@ -563,6 +583,7 @@ section,
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .hero img {
@@ -575,9 +596,9 @@ section,
   z-index: 1;
 }
 
-.hero:before {
+.hero::before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 70%);
+  background: rgba(0, 0, 0, 0.4);
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -601,24 +622,30 @@ section,
 
 .hero p span {
   letter-spacing: 1px;
-  border-bottom: 2px solid var(--accent-color);
-}
-
-.hero .social-links {
-  margin-top: 25px;
+  border-bottom: 3px solid #ffffff;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .hero .social-links a {
   font-size: 24px;
   display: inline-block;
-  color: color-mix(in srgb, var(--default-color), transparent 50%);
-  line-height: 1;
-  margin-right: 20px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 15px;
   transition: 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .hero .social-links a:hover {
-  color: var(--accent-color);
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -634,9 +661,20 @@ section,
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
+.about .content {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
 .about .content h2 {
   font-weight: 700;
   font-size: 24px;
+  color: var(--accent-color);
 }
 
 .about .content ul {
@@ -661,6 +699,7 @@ section,
   line-height: 0;
 }
 
+
 /*--------------------------------------------------------------
 # Stats Section
 --------------------------------------------------------------*/
@@ -668,6 +707,7 @@ section,
   padding: 30px;
   width: 100%;
 }
+
 
 .stats .stats-item i {
   color: var(--accent-color);
@@ -702,6 +742,8 @@ section,
   display: block;
   background: none;
   border-radius: 0;
+  padding: 0;
+  margin-bottom: 20px;
 }
 
 .skills .progress .skill {
@@ -747,6 +789,14 @@ section,
   margin-top: -2px;
   border-left: 2px solid var(--accent-color);
   position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 .resume .resume-item h4 {
@@ -848,8 +898,14 @@ section,
   inset: 0;
   z-index: 3;
   transition: all ease-in-out 0.3s;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .portfolio .portfolio-content .portfolio-info h4 {
@@ -904,33 +960,27 @@ section,
 }
 
 /*--------------------------------------------------------------
-# deled Section
+# Services Section
 --------------------------------------------------------------*/
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item {
+.services .service-item {
   position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  transition: all 0.3s ease;
+  animation: glassGlow 5s infinite;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item .icon {
+.services .service-item:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-color);
+}
+
+.services .service-item .icon {
   background: var(--accent-color);
   display: flex;
   align-items: center;
@@ -943,105 +993,35 @@ and scalability.e-item .icon {
   margin-right: 20px;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item .icon i {
+.services .service-item .icon i {
   color: var(--contrast-color);
   font-size: 24px;
   line-height: 0;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item:hover .icon {
+.services .service-item:hover .icon {
   background: var(--surface-color);
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item:hover .icon i {
+.services .service-item:hover .icon i {
   color: var(--accent-color);
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item .title {
+.services .service-item .title {
   font-weight: 700;
   margin-bottom: 15px;
   font-size: 18px;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item .title a {
+.services .service-item .title a {
   color: var(--heading-color);
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item .title a:hover {
+.services .service-item .title a:hover {
   color: var(--accent-color);
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-item .description {
+.services .service-item .description {
   line-height: 24px;
   font-size: 14px;
 }
@@ -1049,6 +1029,33 @@ and scalability.e-item .description {
 /*--------------------------------------------------------------
 # Testimonials Section
 --------------------------------------------------------------*/
+.testimonials {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
+  pointer-events: none;
+}
+
+.testimonials .section-title h2 {
+  color: #ffffff !important;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.testimonials .section-title h2:after {
+  background: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
 .testimonials .testimonials-carousel,
 .testimonials .testimonials-slider {
   overflow: hidden;
@@ -1063,19 +1070,19 @@ and scalability.e-item .description {
 .testimonials .testimonial-item .testimonial-img {
   width: 90px;
   border-radius: 50%;
-  margin: 0 auto;
+  margin: 0 auto 10px auto;
 }
 
 .testimonials .testimonial-item h3 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   margin: 10px 0 5px 0;
 }
 
 .testimonials .testimonial-item h4 {
   font-size: 14px;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
-  margin: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  margin: 0 0 15px 0;
 }
 
 .testimonials .testimonial-item .quote-icon-left,
@@ -1101,29 +1108,7 @@ and scalability.e-item .description {
 
 .testimonials .testimonial-item p {
   font-style: italic;
-  margin: 0 15px 15px 15px;
-  padding: 20px;
-  background-color: var(--surface-color);
-  position: relative;
-  margin-bottom: 35px;
-  border-radius: 6px;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-}
-
-.testimonials .testimonial-item p::after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-top: 20px solid var(--surface-color);
-  border-right: 20px solid transparent;
-  border-left: 20px solid transparent;
-  position: absolute;
-  bottom: -20px;
-  left: calc(50% - 20px);
-}
-
-.testimonials .swiper-wrapper {
-  height: auto;
+  margin: 0 auto 15px auto;
 }
 
 .testimonials .swiper-pagination {
@@ -1134,21 +1119,27 @@ and scalability.e-item .description {
 .testimonials .swiper-pagination .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
-  background-color: var(--background-color);
+  background-color: rgba(255, 255, 255, 0.3);
   opacity: 1;
-  border: 1px solid var(--accent-color);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: var(--accent-color);
+  background-color: #fff;
+  width: 30px;
+  border-radius: 10px;
 }
 
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
 .contact .info-wrap {
-  background-color: var(--surface-color);
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
 
@@ -1194,22 +1185,26 @@ and scalability.e-item .description {
   color: var(--contrast-color);
 }
 
-.contact .php- Email-form {
-  background-color: var(--surface-color);
-  height: 100%;
+.contact .php-email-form {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
   padding: 30px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 @media (max-width: 575px) {
-  .contact .php- Email-form {
+  .contact .php-email-form {
     padding: 20px;
   }
 }
 
-.contact .php- Email-form input[type=text],
-.contact .php- Email-form input[type=Email],
-.contact .php- Email-form textarea {
+.contact .php-email-form input[type=text],
+.contact .php-email-form input[type=email],
+.contact .php-email-form textarea {
   font-size: 14px;
   padding: 10px 15px;
   box-shadow: none;
@@ -1219,19 +1214,19 @@ and scalability.e-item .description {
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.contact .php- Email-form input[type=text]:focus,
-.contact .php- Email-form input[type=Email]:focus,
-.contact .php- Email-form textarea:focus {
+.contact .php-email-form input[type=text]:focus,
+.contact .php-email-form input[type=email]:focus,
+.contact .php-email-form textarea:focus {
   border-color: var(--accent-color);
 }
 
-.contact .php- Email-form input[type=text]::placeholder,
-.contact .php- Email-form input[type=Email]::placeholder,
-.contact .php- Email-form textarea::placeholder {
+.contact .php-email-form input[type=text]::placeholder,
+.contact .php-email-form input[type=email]::placeholder,
+.contact .php-email-form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-.contact .php- Email-form button[type=submit] {
+.contact .php-email-form button[type=submit] {
   color: var(--contrast-color);
   background: var(--accent-color);
   border: 0;
@@ -1240,7 +1235,7 @@ and scalability.e-item .description {
   border-radius: 50px;
 }
 
-.contact .php- Email-form button[type=submit]:hover {
+.contact .php-email-form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 25%);
 }
 
@@ -1306,35 +1301,15 @@ and scalability.e-item .description {
 }
 
 /*--------------------------------------------------------------
-# serviceormance, and scalability.e Details Section
+# Service Details Section
 --------------------------------------------------------------*/
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es-list {
+.service-details .services-list {
   padding: 10px 30px;
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
   margin-bottom: 20px;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es-list a {
+.service-details .services-list a {
   display: block;
   line-height: 1;
   padding: 8px 0 8px 15px;
@@ -1344,107 +1319,47 @@ and scalability.es-list a {
   transition: 0.3s;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es-list a.active {
+.service-details .services-list a.active {
   color: var(--heading-color);
   font-weight: 700;
   border-color: var(--accent-color);
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es-list a:hover {
+.service-details .services-list a:hover {
   border-color: var(--accent-color);
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details .I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.es-img {
+.service-details .services-img {
   margin-bottom: 20px;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details h3 {
+.services h3 {
   font-size: 26px;
   font-weight: 700;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details h4 {
+.services h4 {
   font-size: 20px;
   font-weight: 700;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details p {
+.services p {
   font-size: 15px;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details ul {
+.services ul {
   list-style: none;
   padding: 0;
   font-size: 15px;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details ul li {
+.services ul li {
   padding: 5px 0;
   display: flex;
   align-items: center;
 }
 
-.I build fast,
-responsive,
-and modern websites using the latest web technologies. From simple landing pages to full-scale web applications,
-I focus on clean code,
-performance,
-and scalability.e-details ul i {
+.services ul i {
   font-size: 20px;
   margin-right: 8px;
   color: var(--accent-color);
@@ -1453,6 +1368,53 @@ and scalability.e-details ul i {
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
+/*--------------------------------------------------------------
+# Footer Section
+--------------------------------------------------------------*/
+.footer {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-size: 14px;
+  padding: 40px 0;
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.footer .social-links {
+  margin-bottom: 25px;
+}
+
+.footer .social-links a {
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  margin: 0 5px;
+  border-radius: 50%;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  transition: 0.3s;
+}
+
+.footer .social-links a:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 25%);
+  transform: translateY(-3px);
+}
+
+.footer .social-links a.facebook {
+  background: #1877F2;
+}
+
+.footer .social-links a.instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.footer .copyright {
+  margin-bottom: 5px;
+}
+
+.footer .credits {
+  font-size: 13px;
 }
